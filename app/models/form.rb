@@ -1,5 +1,5 @@
 class Form < ActiveRecord::Base
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   attr_accessible :name, :number_of_questions
   attr_accessor :number_of_questions

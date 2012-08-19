@@ -1,5 +1,5 @@
 <h1><%= @form.name %></h1>
-<%= simple_form_for @form, url: answer_form_questions_path(@form), html: { method: :post } do |f| %>
+<%= simple_form_for @form, url: form_submit_answers_path(@form), html: { method: :post } do |f| %>
   <%= label_tag 'Username' %>
   <%= text_field_tag :username %>
   <ul>

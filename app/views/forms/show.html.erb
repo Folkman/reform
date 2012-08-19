@@ -4,7 +4,7 @@
     <th>Question</th>
     <th>Format</th>
   </tr>
-  <% @form.questions.each do |q| %>
+  <% @questions.each do |q| %>
     <tr>
       <td><%= q.value  %></td>
       <td><%= q.format  %></td>
@@ -12,4 +12,10 @@
   <% end %>
 </table>
 <%= link_to 'Edit Questions', edit_form_questions_path(@form) %>
-<%= link_to 'back to forms', forms_path %>
+
+<p>Users who answered:</p>
+<ul>
+  <% @usernames.each do |username| %>
+    <li><%= link_to username, form_answers_for_user_path(@form, username) %></li>
+  <% end %>
+</ul>

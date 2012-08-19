@@ -10,6 +10,12 @@ class FormsController < ApplicationController
 
   def show
     @form = Form.find params[:id]
+    @questions = @form.questions
+    @usernames = []
+
+    @questions.first.answers.each do |ans|
+      @usernames << ans.username
+    end
   end
 
   def edit

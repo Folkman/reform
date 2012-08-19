@@ -2,12 +2,14 @@ Reform::Application.routes.draw do
 
   resources :forms do
     resources :questions do
-      get 'edit', on: :collection
-      put 'update', on: :collection
-      get 'answer', on: :collection
-      post 'answer' => 'questions#submit_answers', on: :collection
+      collection do
+        get 'edit'
+        put 'update'
+        get 'answer' => 'answers#answer'
+      end
     end
-    get 'answers/:username' => 'questions#show_answers', as: :answers_for_user
+    post 'submit_answers' => 'answers#submit'
+    get 'answers/:username' => 'answers#show', as: :answers_for_user
   end
 
   root to: 'forms#index'
