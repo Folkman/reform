@@ -11,14 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817164813) do
+ActiveRecord::Schema.define(:version => 20120819142738) do
+
+  create_table "answers", :force => true do |t|
+    t.string   "value"
+    t.integer  "question_id"
+    t.string   "username"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
   create_table "forms", :force => true do |t|
     t.string   "name"
-    t.integer  "number_of_questions"
-    t.text     "data"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  create_table "questions", :force => true do |t|
+    t.string   "value"
+    t.string   "format"
+    t.integer  "form_id"
+    t.integer  "arrangement"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "questions", ["form_id"], :name => "index_questions_on_form_id"
 
 end

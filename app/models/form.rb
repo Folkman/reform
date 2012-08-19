@@ -1,3 +1,8 @@
 class Form < ActiveRecord::Base
-  attr_accessible :data, :name, :number_of_questions
+  has_many :questions
+
+  attr_accessible :name, :number_of_questions
+  attr_accessor :number_of_questions
+
+  validates :name, presence: true, uniqueness: true
 end

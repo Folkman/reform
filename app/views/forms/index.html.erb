@@ -1,0 +1,11 @@
+<ul>
+<% @forms.each do |form| %>
+  <li>
+    <%= link_to form.name, form_path(form) %>
+    <%= link_to 'edit', edit_form_path(form) %>
+    <%= link_to 'delete', form_path(form), method: :delete %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to 'Add New Form', new_form_path %>

@@ -1,0 +1,16 @@
+<%= form_tag form_questions_path, method: method do %>
+  <ul>
+    <% 1.upto(@number_of_questions) do |i| %>
+      <li>
+        <%= label_tag 'Value:' %>
+        <%= text_field "question_#{i}".to_sym, :value, value: instance_variable_get("@value#{i}") %>
+        <%= label_tag 'Type:' %>
+        <%= text_field "question_#{i}".to_sym, :format, value: instance_variable_get("@format#{i}") %>
+        <%= label_tag 'Order:' %>
+        <%= text_field "question_#{i}".to_sym, :arrangement, value: instance_variable_get("@arrangement#{i}") || i %>
+      </li>
+    <% end %>
+  </ul>
+  <%= hidden_field_tag :number_of_questions, @number_of_questions %>
+  <%= submit_tag 'Submit' %>
+<% end %>

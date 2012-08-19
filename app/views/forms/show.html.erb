@@ -1,0 +1,15 @@
+<h1><%= @form.name %></h1>
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Format</th>
+  </tr>
+  <% @form.questions.each do |q| %>
+    <tr>
+      <td><%= q.value  %></td>
+      <td><%= q.format  %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Edit Questions', edit_form_questions_path(@form) %>
+<%= link_to 'back to forms', forms_path %>

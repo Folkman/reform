@@ -1,4 +1,14 @@
 Reform::Application.routes.draw do
+
+  resources :forms do
+    resources :questions do
+      get 'edit', on: :collection
+      put 'update', on: :collection
+    end
+  end
+
+  root to: 'forms#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
