@@ -4,7 +4,10 @@ Reform::Application.routes.draw do
     resources :questions do
       get 'edit', on: :collection
       put 'update', on: :collection
+      get 'answer', on: :collection
+      post 'answer' => 'questions#submit_answers', on: :collection
     end
+    get 'answers/:username' => 'questions#show_answers', as: :answers_for_user
   end
 
   root to: 'forms#index'

@@ -1,0 +1,7 @@
+<h1><%= @form.name %></h1>
+<ul>
+  <% 1.upto(@number_of_questions) do |i| %>
+    <li><%= instance_variable_get("@question_#{i}").value %></li>
+    <li><%= instance_variable_get("@answer_#{i}").value %></li>
+  <% end %>
+</ul>

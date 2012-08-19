@@ -5,7 +5,7 @@
         <%= label_tag 'Value:' %>
         <%= text_field "question_#{i}".to_sym, :value, value: instance_variable_get("@value#{i}") %>
         <%= label_tag 'Type:' %>
-        <%= text_field "question_#{i}".to_sym, :format, value: instance_variable_get("@format#{i}") %>
+        <%= select_tag("question_#{i}[format]", options_for_select([['boolean', 'boolean'], ['string', 'string'], ['email', 'email'], ['url', 'url'], ['tel', 'tel'], ['text', 'text'], ['file', 'file'], ['integer', 'integer'], ['float', 'float'], ['decimal', 'decimal'], ['range', 'range'], ['datetime', 'datetime'], ['date', 'date'], ['time', 'time'], ['select', 'select'], ['radio_buttons', 'radio_buttons'], ['check_boxes', 'check_boxes'], ['country', 'country']], selected: instance_variable_get("@format#{i}") || 'string' )) %>
         <%= label_tag 'Order:' %>
         <%= text_field "question_#{i}".to_sym, :arrangement, value: instance_variable_get("@arrangement#{i}") || i %>
       </li>
@@ -14,3 +14,5 @@
   <%= hidden_field_tag :number_of_questions, @number_of_questions %>
   <%= submit_tag 'Submit' %>
 <% end %>
+
+<%  %>

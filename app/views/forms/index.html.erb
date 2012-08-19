@@ -4,6 +4,7 @@
     <%= link_to form.name, form_path(form) %>
     <%= link_to 'edit', edit_form_path(form) %>
     <%= link_to 'delete', form_path(form), method: :delete %>
+    <%= link_to 'answer', answer_form_questions_path(form) %>
   </li>
 <% end %>
 </ul>
