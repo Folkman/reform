@@ -1,0 +1,6 @@
+<%= flash[:error] if flash[:error].present? %>
+<%= form_tag form_answers_check_username_path(@form), method: :post do %>
+  <%= label_tag 'Enter a username:' %>
+  <%= text_field_tag 'username' %>
+  <%= submit_tag 'Submit' %>
+<% end %>

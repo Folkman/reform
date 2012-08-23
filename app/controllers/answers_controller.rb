@@ -1,5 +1,29 @@
 class AnswersController < ApplicationController
 
+  def login
+    @form = Form.find params[:form_id]
+  end
+
+  def check_username
+    @form = Form.find params[:form_id]
+    questions = @form.questions
+    usernames = Array.new
+
+    questions.each do |q|
+      usernames << q.answers.where('username = ?', params[:username]).first.try(:username)
+    end
+
+    if params[:username].blank?
+      flash.now[:error] = "Username can't be blank"
+      render :login
+    elsif usernames.include?(params[:username])
+      flash.now[:error] = 'Username already exists'
+      render :login
+    else
+      redirect_to answer_form_questions_path(@form, username: params[:username])
+    end
+  end
+
   def answer
     @form = Form.find params[:form_id]
     @questions = @form.questions
@@ -9,10 +33,11 @@ class AnswersController < ApplicationController
   def submit
     form = Form.find params[:form_id]
     questions = form.questions
+    username = nil
     saved = false
 
     questions.each do |q|
-      q.answers << Answer.new(value: params[:form]["answer_#{q.id}".to_sym][:value], username: params[:username])
+      q.answers << Answer.new(params[:form]["answer_#{q.id}".to_sym])
       saved = q.save
     end
 
@@ -31,5 +56,17 @@ class AnswersController < ApplicationController
       instance_variable_set("@question_#{@number_of_questions}", q)
       instance_variable_set("@answer_#{@number_of_questions}", q.answers.where('username = ?', params[:username]).first)
     end
+  end
+
+  def destroy
+    form = Form.find params[:form_id]
+    questions = form.questions
+    answers = []
+
+    questions.each do |q|
+      answers = q.answers.where('username = ?', params[:username]).pluck(:id)
+    end
+    Answer.destroy(answers)
+    redirect_to form_path(form)
   end
 end

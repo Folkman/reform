@@ -8,8 +8,11 @@ Reform::Application.routes.draw do
         get 'answer' => 'answers#answer'
       end
     end
+    get 'answers/login' => 'answers#login', as: :answers_login
+    post 'answers/check_username' => 'answers#check_username', as: :answers_check_username
     post 'submit_answers' => 'answers#submit'
     get 'answers/:username' => 'answers#show', as: :answers_for_user
+    delete 'answers/:username' => 'answers#destroy'
   end
 
   root to: 'forms#index'

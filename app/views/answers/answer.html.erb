@@ -1,16 +1,20 @@
 <h1><%= @form.name %></h1>
 <%= simple_form_for @form, url: form_submit_answers_path(@form), html: { method: :post } do |f| %>
-  <%= label_tag 'Username' %>
-  <%= text_field_tag :username %>
   <ul>
     <% @questions.each do |q| %>
       <%= f.simple_fields_for "answer_#{q.id}".to_sym do |answer| %>
         <li>
           <%= label_tag q.value %>
-          <%= answer.input :value, label: false, as: q.format.to_sym %>
+          <% if q.format == ('date' || 'datetime' || 'time') %>
+            <%= answer.input :date_time, label: false, as: q.format.to_sym %>
+          <% else %>
+            <%= answer.input :value, label: false, as: q.format.to_sym %>
+          <% end %>
+          <%= answer.hidden_field :username, value: params[:username] %>
         </li>
       <% end %>
     <% end %>
   </ul>
+  <%= hidden_field_tag :username, params[:username] %>
   <%= submit_tag 'Submit' %>
 <% end %>

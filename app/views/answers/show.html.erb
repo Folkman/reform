@@ -1,7 +1,18 @@
 <h1><%= @form.name %></h1>
 <ul>
   <% 1.upto(@number_of_questions) do |i| %>
-    <li><%= instance_variable_get("@question_#{i}").value %></li>
-    <li><%= instance_variable_get("@answer_#{i}").value %></li>
+    <% question = instance_variable_get("@question_#{i}") %>
+    <% answer = instance_variable_get("@answer_#{i}") %>
+
+    <li><%= question.value %>
+    <% if question.format == 'date' %>
+      <%= answer.date_time.to_date %></li>
+    <% elsif question.format == 'time' %>
+      <%= answer.date_time.to_time %></li>
+    <% elsif question.format == 'time' %>
+      <%= answer.date_time.to_datetime %></li>
+    <% else %>
+      <%= answer.value %></li>
+    <% end %>
   <% end %>
 </ul>

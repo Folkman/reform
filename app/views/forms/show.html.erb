@@ -16,6 +16,9 @@
 <p>Users who answered:</p>
 <ul>
   <% @usernames.each do |username| %>
-    <li><%= link_to username, form_answers_for_user_path(@form, username) %></li>
+    <li>
+      <%= link_to username, form_answers_for_user_path(@form, username) %>
+      <%= link_to 'Delete', form_answers_for_user_path(@form, username), method: :delete %>
+    </li>
   <% end %>
 </ul>
